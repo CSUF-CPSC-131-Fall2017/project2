@@ -1,0 +1,4 @@
+*.o
+test
+Project1exe
+Project1exe.dSYM/

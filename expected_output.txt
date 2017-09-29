@@ -1,0 +1,44 @@
+PASSED Webpage01.getURL() test: expected and received http://www.google.com
+PASSED Webpage01.getTime() test: expected and received 1506134400
+PASSED Webpage02.getURL() test: expected and received http://twitter.com
+PASSED Webpage02.getTime() test: expected and received 1506134420
+PASSED Webpage03.getURL() test: expected and received http://stackoverflow.com
+PASSED Webpage03.getTime() test: expected and received 1506134440
+PASSED BrowserHistory.getNavSize(): expected and received 1
+PASSED BrowserHistory.getURL(): expected and received http://www.google.com
+PASSED BrowserHistory.getNavSize(): expected and received 2
+PASSED BrowserHistory.getURL(): expected and received http://twitter.com
+PASSED BrowserHistory.back(): expected and received http://www.google.com
+PASSED BrowserHistory.getURL(): expected and received http://www.google.com
+PASSED BrowserHistory.forward(): expected and received http://twitter.com
+PASSED BrowserHistory.getNavSize(): expected and received 2
+PASSED BrowserHistory.getURL(): expected and received http://stackoverflow.com
+PASSED BrowserHistory.getNavSize(): expected and received 3
+PASSED BrowserHistory.getURL(): expected and received https://en.wikipedia.org/wiki/International_Space_Station
+PASSED BrowserHistory.getNavSize(): expected and received 7
+PASSED BrowserHistory.getURL(): expected and received http://www.binomial.info/
+PASSED BrowserHistory.back() 02: expected and received https://twitter.com/sehulrburt
+PASSED BrowserHistory.forward() 02: expected and received https://sites.google.com/site/richgel99/
+
+Printing Back Sites:
+https://en.wikipedia.org/
+https://en.wikipedia.org/wiki/NASA
+https://en.wikipedia.org/wiki/International_Space_Station
+https://twitter.com/
+https://twitter.com/sehulrburt
+
+Printing Forward Sites:
+http://www.binomial.info/
+https://sites.google.com/site/richgel99/
+
+Printing Full History:
+https://en.wikipedia.org/
+https://en.wikipedia.org/wiki/NASA
+https://en.wikipedia.org/wiki/Neil_Armstrong
+https://en.wikipedia.org/wiki/Apollo_11
+https://en.wikipedia.org/wiki/International_Space_Station
+https://twitter.com/
+https://twitter.com/sehulrburt
+http://stephaniehurlburt.com/
+http://www.binomial.info/
+https://sites.google.com/site/richgel99/
