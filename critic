@@ -74,11 +74,11 @@ def compile(source_path_list, library_name_list, output_path):
 def build():
     return (compile(['main.cpp', 'BrowserHistory.cpp', 'Webpage.cpp'],
                    [],
-                   ['Project1exe']))
+                   ['Project2exe']))
 
 def test():
     return (build() and
-            command(['./Project1exe']))
+            command(['./Project2exe']))
 
 def team():
     contribs = find_contributors()
