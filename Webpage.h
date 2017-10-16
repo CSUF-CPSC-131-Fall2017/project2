@@ -1,4 +1,4 @@
-////
+//
 //  Webpage.hpp
 //  Project II - C++ -CPSC131
 //
@@ -20,8 +20,8 @@ public:
     
 private:
     
-    string webpageURL;
-    time_t timeVisited;
+    string webURL;
+    time_t timeVisit;
     // Add private member variables for your class along with any
     // other variables required to implement the public member functions
     // TO BE COMPLETED
