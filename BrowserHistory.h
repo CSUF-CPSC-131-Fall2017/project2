@@ -1,4 +1,4 @@
-////
+//
 //  BrowserHistory.hpp
 //  Project II - C++ -CPSC131
 //
@@ -19,14 +19,19 @@ using namespace std;
 class StringNode {
     
 private:
-    string element;
-    StringNode *next;
-    
+    string data;
+    StringNode *next_ptr;
     friend class BrowserHistory;
+    
+public:
+    
+    
 };
 
 class BrowserHistory {
 public:
+    
+    
     BrowserHistory();
     ~BrowserHistory();
     
@@ -37,7 +42,7 @@ public:
     
     void readHistory(string fileName);
     
-    bool empty() const;
+    //bool empty() const; //testing
     
     string getURL();
     size_t getNavSize();
@@ -47,10 +52,12 @@ public:
     void printFullHistory();
     
 private:
-    int n;
-    string URL;
-    size_t NavSize;
-    StringNode *head;
+    int n;//0
+    string URL;//""
+    size_t NavSize; //0
+    StringNode *head_ptr;//
+    
+
     
     // Add private member variables for your class along with any
     // other variables required to implement the public member functions
