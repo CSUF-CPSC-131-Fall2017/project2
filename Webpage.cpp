@@ -1,4 +1,4 @@
-////
+//
 //  Webpage.cpp
 //  Project II - C++ -CPSC131
 //
@@ -10,23 +10,25 @@
 
 Webpage::Webpage() {
     // TO BE COMPLETED
+    webURL = "";
+    timeVisit = time(NULL);
 }
 
 Webpage::Webpage(const string& webpageURL, const time_t& timeVisited) {
     
-    this->webpageURL = webpageURL;
-    this->timeVisited = timeVisited;
+    this->webURL  = webpageURL;
+    this->timeVisit = timeVisited;
     
     
     // TO BE COMPLETED
 }
 
 string Webpage::getURL() {
-    return webpageURL;
+    return webURL;
     // TO BE COMPLETED
 }
 
 time_t Webpage::getTime() {
-    return timeVisited;
+    return timeVisit;
     // TO BE COMPLETED
 }
