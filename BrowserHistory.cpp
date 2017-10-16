@@ -10,21 +10,30 @@
 
 
 BrowserHistory::BrowserHistory()
-    :head (NULL){} // TO BE COMPLETED
+    :head_ptr (NULL){
+        n       = 0;
+        URL     = " ";
+        NavSize = 0;
+        
+    } // TO BE COMPLETED
 
 
 BrowserHistory::~BrowserHistory() {
     // TO BE COMPLETED
-    delete head;
+    // use (n + 1)
+    delete head_ptr;
 }
 
 void BrowserHistory::visitSite(Webpage newSite) {
+    this->URL = newSite.getURL();
+    this->NavSize++;
     
     // TO BE COMPLETED
 }
 
 string BrowserHistory::getURL() {
     // TO BE COMPLETED
+
     return URL;
     }
 
@@ -35,15 +44,19 @@ size_t BrowserHistory::getNavSize(){
 }
 
 string BrowserHistory::back() {
+
+    this->NavSize--;
     // TO BE COMPLETED
 
     return URL;
 }
 
 string BrowserHistory::forward() {
-
     // TO BE COMPLETED
-    return URL;
+    
+    
+    //return (head_ptr->element);
+    return (URL);
 }
 
 void BrowserHistory::readHistory(string fileName) {
@@ -53,24 +66,37 @@ void BrowserHistory::readHistory(string fileName) {
     if (myfile.is_open()) {
         cout << "Successfully opened file " << fileName << endl;
         string newSite;
-        string webAdress;
-        int    WebNumber;
-        while (myfile >> newSite >> webAdress >> WebNumber){
-        cout << "" << newSite << " " << webAdress << " " << WebNumber << endl;
-    
-            }
-                myfile.close(); // TO BE COMPLETED
-                    }
-                        }
-
-void BrowserHistory::printBackSites() {
-
-    // TO BE COMPLETED
+        string webpageURL;
+        int    timeVisited;
+        
+        while (myfile >> newSite >> webpageURL >> timeVisited ){
+            //cout << "" << newSite << " " << webpageURL << " " << timeVisited  << endl;
+             Webpage wp =  Webpage(webpageURL, timeVisited);
+             BrowserHistory bh = BrowserHistory();
+             bh.visitSite(wp);
+            
+            //cout << "------->"<<URL << NavSize << endl;
+        }
+        myfile.close(); // TO BE COMPLETED
+    }
 }
+
+void BrowserHistory::printBackSites(){
+    
+//    StringNode *current;
+//    current = head_ptr;
+//    while (current == nullptr) {
+//        cout << current->data;
+//    }
+        // TO BE COMPLETED
+}//how to do forward and back?
 
 void BrowserHistory::printForwardSites() {
+    
     // TO BE COMPLETED
-}
+    
+    //how do you print it??
+}//until the node is empty? can we do a stack?? and how???// do i need to use recursion
 
 void BrowserHistory::printFullHistory() {
     // TO BE COMPLETED
