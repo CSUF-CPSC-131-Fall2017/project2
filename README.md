@@ -3,5 +3,5 @@ Project 2
 
 MUST EDIT WITH YOUR OWN NAME AND EMAIL IN THE SAME FORMAT
 
-Group members:
+Group members: JEREMY ESCOBAR
 escobarjeremy@csu.fullerton.edu
