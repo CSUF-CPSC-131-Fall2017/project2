@@ -1,4 +1,4 @@
-////
+//
 //  BrowserHistory.cpp
 //  Project II - C++ -CPSC131
 //
@@ -7,103 +7,165 @@
 //
 
 #include "BrowserHistory.h"
+#include <iostream>
 
+BrowserHistory::BrowserHistory(){
+    // TO BE COMPLETED
 
-BrowserHistory::BrowserHistory()
-    {
-        head_ptr = new StringNode;
-        tail_ptr = new StringNode;
-        head_ptr ->next_ptr = tail_ptr;
-        tail_ptr ->prev_ptr = head_ptr;
-        // link head to the tail
-        cursor = head_ptr;
-        n       = 0;
-        URL     = " ";
-        NavSize = 0;
+        head_ptr = new Webpage;             //allocating memory blocks for webpage head pointer
+        tail_ptr = new Webpage;             //allocating memory blocks for webpage tail pointer
+        head_ptr ->next_ptr = tail_ptr;     //linking head to tail pointers
+        tail_ptr ->prev_ptr = head_ptr;     //linking head to tail pointers
+        cursor = head_ptr;                  //setting cursor equal to head
+        history = new Webpage;              //allocating memory block for webpage history
+        history_head = history;             //setting head of history to history
+        NavSize = 0;                        //setting defualt to 0 on navsize
         
-    } // TO BE COMPLETED
+    }// TO BE COMPLETED
 
 
 BrowserHistory::~BrowserHistory() {
+    delete head_ptr;//destructor
     // TO BE COMPLETED
-    // use (n + 1)
-   // delete head_ptr;
 }
 
 void BrowserHistory::visitSite(Webpage newSite) {
-    
-    this->URL = newSite.getURL();
-    this->NavSize++;
-    
     // TO BE COMPLETED
+    Webpage* temp = new Webpage(newSite.webURL, newSite.timeVisit);//overloading parameters from filename
+    Webpage* temp2 = tail_ptr->prev_ptr;    //creating temp2 for navsize navigation
+    while(cursor->next_ptr != tail_ptr){    //while to direct cursor to next and cannot reach tail
+        temp2 = temp2->prev_ptr;            //setting temp equal to prev temp
+        delete temp2->next_ptr;             //delete temp so we can reload later
+        temp2->next_ptr = tail_ptr;         //load temp with next weburl and go till you reach tail
+        NavSize--;                          //decrement navsize
+    }
+    
+    temp->next_ptr = tail_ptr;
+    tail_ptr->prev_ptr = temp;
+    temp->prev_ptr = cursor;
+    cursor->next_ptr = temp;
+    cursor= temp;
+    NavSize++;
+    
+    Webpage *temp3 = new Webpage(newSite.webURL, newSite.timeVisit);
+    temp3->prev_ptr = history;
+    history->next_ptr = temp3;
+    history = history->next_ptr;
+    
 }
 
 string BrowserHistory::getURL() {
     // TO BE COMPLETED
-    return URL;
-    }
+    //cout << "in get URL" << cursor->webURL << endl;
+    return cursor->webURL;
+}
 
 
 size_t BrowserHistory::getNavSize(){
     // TO BE COMPLETED
-   return NavSize;
+    if(head_ptr->next_ptr == tail_ptr){
+        return 0;
+    }
+    int count = 0;
+    Webpage* temp = head_ptr->next_ptr;
+    while(temp != tail_ptr){
+    temp = temp->next_ptr;
+        count++;
+    }
+
+  return count;
+//return NavSize;
 }
 
 string BrowserHistory::back() {
-    
-    StringNode* old = head_ptr;
-    head_ptr = old->next_ptr;
-    delete old;
-    this->NavSize--;
     // TO BE COMPLETED
-    return URL;
-//cursor iterator linked linked
+//
+    try{
+    if (cursor != head_ptr)
+        cursor = cursor->prev_ptr;
+    else throw invalid_argument("Back on a non existing webpage ");
+    }
+    catch (const invalid_argument &e) {
+        cerr << e.what();
+    };
+
+    return cursor->webURL;
+
 }
 
 string BrowserHistory::forward() {
     // TO BE COMPLETED
-    StringNode* v = new StringNode;
-    v->data = n;
-    v->next_ptr = head_ptr;
-    head_ptr = v;
+    try {
+    if (cursor != tail_ptr)
+        cursor = cursor->next_ptr;
 
-    return this->URL;
+        else throw invalid_argument("Back on a non existing webpage ");
+    }
+    catch (const invalid_argument &e) {
+        cerr << e.what();
+    };
+    return cursor->webURL;
 
 }
 
 void BrowserHistory::readHistory(string fileName) {
     
     ifstream myfile(fileName);
-    
-    if (myfile.is_open()) {
+    string line;
+    if(myfile.is_open()){
         cout << "Successfully opened file " << fileName << endl;
-        string newSite;
-        string webpageURL;
-        int    timeVisited;
+        string key;
+        string webPageUrl;
+        int timeVisted;
         
-        while (myfile >> newSite >> webpageURL >> timeVisited ){
-            if(((newSite != "back" || newSite != "front") && (webpageURL != "back" || webpageURL != "front")) || (timeVisited > 0 ))
-            {
-             Webpage wp = Webpage(webpageURL, timeVisited);
-             BrowserHistory bh = BrowserHistory();
-             bh.visitSite(wp);
+        while(myfile >> key ){
+            if(key.compare("new") == 0){
+                myfile >> webPageUrl >> timeVisted;
+                Webpage wp(webPageUrl, timeVisted);
+                visitSite(wp);
             }
-            
+            else if(key.compare("back") == 0){
+                back();
+            }
+            else if(key.compare("forward")==0){
+                forward();
+            }
         }
-        myfile.close(); // TO BE COMPLETED
     }
 }
 
 void BrowserHistory::printBackSites(){
 
-    // TO BE COMPLETED
+    int count=0;
+    while(cursor->prev_ptr != head_ptr){
+        cout << back() << endl;
+        count++;
+    }
+    for(int i=0; i < count; i++){
+        forward();
+    }
+     //TO BE COMPLETED
 }
 
 void BrowserHistory::printForwardSites() {
-    
+
     // TO BE COMPLETED
+    int count=0;
+    cout << getURL() << endl;
+    while(cursor->next_ptr != tail_ptr){
+        cout << forward() << endl;
+        count++;
+    }
+    for(int i=0; i < count; i++){
+        back();
+    }
 }
 
 void BrowserHistory::printFullHistory() {
-    // TO BE COMPLETED
+    
+    for(Webpage* temp=history_head; temp != history; temp = temp->next_ptr){
+        cout << temp->getURL() << endl;
+    }
+    
+   // TO BE COMPLETED
 }
