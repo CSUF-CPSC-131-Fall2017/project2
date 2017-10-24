@@ -22,6 +22,9 @@ private:
     
     string webURL;
     time_t timeVisit;
+    Webpage *next_ptr;
+    Webpage *prev_ptr;
+    friend class BrowserHistory;
     // Add private member variables for your class along with any
     // other variables required to implement the public member functions
     // TO BE COMPLETED
