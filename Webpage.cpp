@@ -1,5 +1,3 @@
-////
-//  Webpage.cpp
 //  Project II - C++ -CPSC131
 //
 //  Created by Jeremy Escobar on 10/10/17.
@@ -10,13 +8,13 @@
 
 Webpage::Webpage() {
     // TO BE COMPLETED
-    webURL = "";
+    webURL = " ";
     timeVisit = time(NULL);
 }
 
 Webpage::Webpage(const string& webpageURL, const time_t& timeVisited) {
     
-    this->webURL  = webpageURL;
+    this->webURL    = webpageURL;
     this->timeVisit = timeVisited;
     
     
