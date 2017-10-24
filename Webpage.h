@@ -1,4 +1,5 @@
 //
+//
 //  Webpage.hpp
 //  Project II - C++ -CPSC131
 //
@@ -20,10 +21,10 @@ public:
     
 private:
     
-    string webURL;
-    time_t timeVisit;
-    Webpage *next_ptr;
-    Webpage *prev_ptr;
+    string webURL;    //webpage URL
+    time_t timeVisit; //time visited
+    Webpage *next_ptr;//used to point to next pointer webpage
+    Webpage *prev_ptr;//used to point to previous pointer on webpage
     friend class BrowserHistory;
     // Add private member variables for your class along with any
     // other variables required to implement the public member functions
