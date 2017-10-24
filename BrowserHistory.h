@@ -14,20 +14,8 @@
 #include <string>
 #include <stdexcept>
 #include "Webpage.h"
-using namespace std;
 
-class StringNode {
-    
-private:
-    string data;
-    StringNode  *next_ptr;
-    StringNode  *prev_ptr;
-    friend class BrowserHistory;
-    
-public:
-    
-    
-};
+using namespace std;
 
 class BrowserHistory {
     
@@ -39,9 +27,12 @@ public:
     void visitSite(Webpage newSite);
     string back();
     string forward();
+    
     void readHistory(string fileName);
+    
     string getURL();
     size_t getNavSize();
+    
     void printBackSites();
     void printForwardSites();
     void printFullHistory();
@@ -49,11 +40,10 @@ public:
     
 private:
     int n;
-    string URL;
-    size_t NavSize;       //a 
-    StringNode *head_ptr; //a pointer that points to the head
-    StringNode *tail_ptr;
-    StringNode *cursor;
+    size_t NavSize;  //a
+    Webpage *head_ptr; //a pointer that points to the head
+    Webpage *tail_ptr;
+    Webpage *cursor;
     
     // Add private member variables for your class along with any
     // other variables required to implement the public member functions
